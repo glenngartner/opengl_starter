@@ -16,16 +16,16 @@ int main() {
     GLuint render_program;
 
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
 #endif
 
-    window = glfwCreateWindow(800, 600, "Hello GLFW", NULL, NULL);
+    window = glfwCreateWindow(800, 600, "Hello GLFW", nullptr, nullptr);
 
-    if (window == NULL) {
+    if (window == nullptr) {
         std::cout << "Failed to create openGL window" << std::endl;
         glfwTerminate();
         return -1;
@@ -45,8 +45,8 @@ int main() {
     render_program = compileShaders();
     GLuint vao;
     std::cout << "GL Version: " << glGetString(GL_VERSION) << std::endl;
-//    glCreateVertexArrays(1, &vao);
-//    glBindVertexArray(vao);
+    glCreateVertexArrays(1, &vao);
+    glBindVertexArray(vao);
 
 
     // render loop
@@ -55,9 +55,9 @@ int main() {
         inputHandler(window);
 
         glClearBufferfv(GL_COLOR, 0, clearColor);
-//        glUseProgram(render_program);
-//        glDrawArrays(GL_POINTS, 0, 1);
-//        glPointSize(40.0f);
+        glUseProgram(render_program);
+        glDrawArrays(GL_POINTS, 0, 1);
+        glPointSize(40.0f);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
